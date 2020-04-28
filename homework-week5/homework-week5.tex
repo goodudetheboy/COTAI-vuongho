@@ -1,0 +1,451 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{calc}
+\usepackage{amssymb}
+\setlength\parindent{0pt} %% Do not touch this
+
+
+%% -----------------------------
+%% TITLE
+%% -----------------------------
+\title{Homework Week \#5} %% Assignment Title
+
+\author{Ho Chi Vuong\\ %% Student name
+AI Math Foundations: Abstract Vector Spaces\\ %% Code and course name
+\textsc{Center of Talent in AI}
+}
+
+\date{\today} %% Change "\today" by another date manually
+%% -----------------------------
+%% -----------------------------
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+   
+%% %%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+
+% --------------------------
+% Start here
+% --------------------------
+
+% %%%%%%%%%%%%%%%%%%%
+\section*{Section P}
+% %%%%%%%%%%%%%%%%%%%
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.1}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Consider linear operator $f:\mathbb{R}^2\to \mathbb{R}^2$ with $f(v_1) = v_1 + 2v_2$ and $f(v_2) = 2v_1 + v_2$ (1). Verify that $f(v_1 + v_2) = 3(v_1 + v_2)$ and $f(v_1- v_2) = -(v_1 - v_2)$ (2)}
+\textbf{
+\begin{enumerate}
+\item $f$ stretches vectors in the $v_1 + v_2$ direction by a factor of 3.
+\item $f$ negates vectors in the $v_1 -v_2$ direction.
+\end{enumerate}}
+\textbf{ Express $f$ using basis $B_v = \{v_1, v_2\}$, then $B_e = \{e_1=v_1 + v_2, e_2=v_1 -v_2\}$:}
+\textbf{
+\begin{enumerate}
+\item$f(av_1 + bv_2) = (a + 2b)v_1 + (2a + b)v_2$: coefficients $a$ \& $b$ are "mixed up".
+\item$f(ae_1 + be_2) = 3ae_1 - be_2$: coefficients $a$ and $b$ are simply scaled.
+\end{enumerate}}
+    
+  \textbf{Clearly, Eq (2) is a better representation than Eq (1) to understand the geometry of $f$. What is the matrix representation of $f$ in $B_v$? in $B_e$?}\\
+
+\begin{enumerate}
+\item Verify that $f(v_1 + v_2) = 3(v_1 + v_2)$ and $f(v_1- v_2) = -(v_1 - v_2)$\\
+Using the linearity of the operator, we have the following:
+$$f(v_1+v_2) = f(v_1) + f(v_2) = v_1 + 2v_2 + 2v_1 + v_2 = 3(v_1 + v_2)$$
+and
+$$f(v_1-v_2) = f(v_1) - f(v-2) = v_1+  2v_2 - 2v_1 - v_2 = -(v_1 - v_2)$$
+\end{enumerate}
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.2}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{$A$ is a Markov matrix, i.e., each column $\mathbf a_i$ is a probability vector. Show that if $p_0$ is a probability $n$-vector then $Ap_0$ is also a probability vector.}\\
+Suppose that $A$ is a $m\times n$ matrix. We have that: 
+$$
+ Ap_0 = \begin{bmatrix}
+A_{11} & \ldots & A_{1n}\\
+\vdots & \ddots \\
+A_{m1} & ldots & A_{mn}
+\end{bmatrix} 
+\begin{bmatrix}
+p_1\\
+\vdots\\
+p_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+p_1a_{11} + \ldots + p_na_{1n}\\
+\vdots\\
+p_1a_{m1} + \ldots + p_na_{mn}
+\end{bmatrix}
+$$
+Taking the sum of the resulting matrix, we have: 
+\begin{align*}
+&p_1a_{11} + \ldots + p_na_{1n} + \ldots + p_1a_{m1} + \ldots + p_na_{mn}\\
+=&p_1(a_{11} + \ldots + a_{m1}) + \ldots + p_n(a_{11} + \ldots + a_{mn})
+\end{align*}
+As each column $\mathbf a_n$ is a probability vector $\Leftrightarrow a_{1n} + \ldots + a_{mn} = 1$ and $p_0$ is a probability matrix, we then continue the above equation:
+\begin{align*}
+=&p_1 + \ldots + p_n\\
+=&1
+\end{align*}
+Thus making $Ap_0$ also a probability matrix.
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.4}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Prove again if $\beta = \{v_1,\dots,v_n\}$ is an eigenbasis of $A_{n\times n}$ with eigenvalues $\lambda_i$'s, then $A$ is diagonalizable: $A=QDQ^{-1}$ with $D=\textsf{diag}(\lambda_1,\dots,\lambda_n)$ and $Q$ a square matrix composed of $v_i$'s as columns.}\\
+As $\beta$ is an eigenbasis of $A$, then we have:
+$$Av_j = \lambda_jv_j$$
+which means:
+\begin{align*}A\begin{bmatrix}
+v_1 &\ldots & v_j
+\end{bmatrix}
+&=\begin{bmatrix}
+\lambda_1v_1 & \ldots & \lambda_nv_n
+\end{bmatrix}\\
+&=diag(\lambda_1,\ldots,\lambda_n)\begin{bmatrix}
+v_1 & \ldots & v_n
+\end{bmatrix}\\
+&=\begin{bmatrix}
+v_1 & \ldots & v_n
+\end{bmatrix}diag(\lambda_1,\ldots,\lambda_n)\\
+\Leftrightarrow A &=\begin{bmatrix}
+v_1 & \ldots & v_n
+\end{bmatrix}diag(\lambda_1,\ldots,\lambda_n)\begin{bmatrix}
+v_1 & \ldots & v_n
+\end{bmatrix}^{-1}
+\end{align*}
+Replacing $\begin{bmatrix}
+v_1 & \ldots & v_n
+\end{bmatrix} = Q$ and $D = diag(\lambda_1,\ldots,\lambda_n)$, we have:
+$$A=QDQ^{-1}$$
+as desired.
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P3.4}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Polarization identity:  $\left \langle v,w \right \rangle = \frac1{2}\big(\Vert v+w\Vert^2 -\Vert v\Vert^2 - \Vert w\Vert^2 \big)$}\\
+We have the right-hand side of the equation:
+\begin{align*}
+\frac1{2}\big(\Vert v+w\Vert^2 -\Vert v\Vert^2 - \Vert w\Vert^2 \big) &= \frac1{2}\big(\langle v+w,v+w \rangle - \langle v,v \rangle - \langle w,w \rangle \big)\\
+& = \frac1{2}\big(\langle v, v \rangle + \langle v, w \rangle + \langle w, v \rangle + \langle w,w \rangle - \langle v,v \rangle - \langle w,w \rangle \big)\\
+& = \frac1{2}\big(\langle v,w \rangle + \langle w,v \rangle \big)\\
+& = \frac1{2}\big(\Vert v\Vert\Vert w \Vert cos(v,w) + \Vert w \Vert \Vert v\Vert cos(w,v)\big)\\
+& = \frac1{2}\big(2\Vert w \Vert \Vert v \Vert cos(v,w)\big)\\
+& = \langle v,w \rangle
+\end{align*}
+which is equal to the left-hand side. We thus prove the Polarization identity.
+
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.5}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Summarize the problem description and solution to find $F_n$ in Fibonacci's rabbits $F_0=0, F_1=1, \dots, F_n=F_{n-1}+F_{n-2}$.}\\
+
+
+
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.6}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Show that $\lambda$ is an eigenvalue of a square $n\times n$ matrix $A$ iff $\textsf{det}(A-\lambda I_n) = 0$. }\\
+We have $\lambda$ is an eigenvalue of a $A_{n\times n}$ when, for any eigenvector $v$:
+$$Av=\lambda v$$
+$$\Leftrightarrow Av-\lambda Iv= 0$$
+$$\Leftrightarrow (A-\lambda I)v=0$$
+
+Geometrically, this transformation transforms $v$ into a $0$ vector, and this is only possible when $\textsf{det}(A-\lambda I) = 0$. We thus have as desired.
+
+
+\subsection*{P4.7-4.9}
+\textbf{Given a *symmetric* positive definite matrix $A>0$, i.e., $x^\top Ax > 0 ~ \forall x\neq 0_n$.}
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.7}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Show that all its eigenvalues are positive, $\lambda_i>0 ~ \forall i$.}\\
+Suppose that $v$ is an eigenvector of $A_{n\times n}$ with eigenvalue $\lambda$, then we have:
+$$Av = \lambda v$$
+$$\Leftrightarrow v^\textsf{T}Av=v^\textsf{T}\lambda v$$
+$$\Rightarrow v^\textsf{T}\lambda v > 0$$
+$$\Rightarrow \lambda(v_1^2+\ldots + v_n^2)>0$$
+and as $(v_1^2+\ldots + v_n^2) > 0$, $\forall v_j \in R^n$,
+$$\Rightarrow\lambda >0$$
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P3.8}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Show that the generalized dot product $\left \langle \mathbf x,\mathbf y \right \rangle_M = \mathbf x^\top M \mathbf y$ with $M\in\mathbb{R}^{n\times n}$ a symmetric positive definite matrix satisfies all 3 requirements of a proper inner product.}\\
+Let $\mathbf x = \begin{bmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{bmatrix}$,$\mathbf y = \begin{bmatrix}
+y_1\\
+y_2\\
+\vdots \\
+y_n
+\end{bmatrix}$ and $M = \begin{bmatrix}
+\mathbf m_1\\
+\mathbf m_2\\
+\vdots\\
+\mathbf m_n
+
+\end{bmatrix}$ with $\mathbf m_i$, $i=1,2,\ldots,n$, having $n$ elements. For any $\mathbf x,\mathbf x'$ in the same inner product space, $c \in R$, we have the following 3 requirements of an inner product:
+\begin{enumerate}
+\item $\langle \mathbf x +\mathbf x',y\rangle = \langle\mathbf x, \mathbf y\rangle + \langle\mathbf x',\mathbf y\rangle $ and $\langle c\mathbf x,\mathbf y\rangle = c\langle \mathbf x,\mathbf y\rangle$\\
+	We have the following: 
+	\begin{align*}
+	\langle\mathbf x +\mathbf x',\mathbf y\rangle &= \begin{bmatrix}
+	x_1+x_1' &
+	x_2 + x_2' &
+	\ldots &
+	x_n+x_n'
+	\end{bmatrix} M\mathbf y\\
+&= \begin{bmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{bmatrix}M\mathbf y + \begin{bmatrix}
+x_1'\\
+x_2'\\
+\vdots\\
+x_n'
+\end{bmatrix}M\mathbf y\\
+&=\langle\mathbf x,\mathbf y\rangle + \langle\mathbf x',\mathbf y\rangle
+	\end{align*}
+and \begin{align*}
+\langle c\mathbf x, y\rangle &= \begin{bmatrix}
+cx_1\\
+cx_2\\
+\vdots\\
+cx_n
+\end{bmatrix}My\\
+&= c\begin{bmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{bmatrix}My\\
+&=c\langle\mathbf x,\mathbf y\rangle
+\end{align*}
+\item $\langle\mathbf x,\mathbf y\rangle = \langle\mathbf y,\mathbf x \rangle$\\
+\begin{align*}
+\langle \mathbf x,\mathbf y\rangle &= \begin{bmatrix}
+x_1 &
+x_2 &
+\ldots &
+x_n
+\end{bmatrix}\begin{bmatrix}
+\mathbf m_1\\
+\mathbf m_2\\
+\vdots\\
+\mathbf m_n
+\end{bmatrix}
+\mathbf y\\
+&= x_1\mathbf m_1 \mathbf y + x_2\mathbf m_2 \mathbf y + \ldots + x_n \mathbf m_n \mathbf y\\
+&= y_1\mathbf m_1 \mathbf x + y_2\mathbf m_2 \mathbf x + \ldots + y_n \mathbf m_n \mathbf x\\
+&= \begin{bmatrix}
+y_1 &
+y_2 &
+\ldots &
+y_n
+\end{bmatrix}\begin{bmatrix}
+\mathbf m_1\\
+\mathbf m_2\\
+\vdots\\
+\mathbf m_n
+\end{bmatrix}
+\mathbf x\\
+&= \langle \mathbf y,\mathbf x\rangle 
+\end{align*}
+\item $\langle \mathbf x,\mathbf x \rangle > 0 $\\
+Since M is a positive definite matrix, it is obvious that:
+
+$$\langle \mathbf x,\mathbf x \rangle = \mathbf x^\mathsf{T}M\mathbf x >0$$
+
+\end{enumerate}
+With the 3 requirements proved, we have the above.
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P3.9}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Prove that the null space and the row space of a matrix are orthogonal, i.e. every vector in null space is orthogonal to every vector in row space (zero dot product).}\\
+Assume we have a matrix $A = \begin{bmatrix}
+v_1\\
+\vdots\\
+v_n
+\end{bmatrix}$, its null space $N(A)$ which contains vectors $x$ satisfying $Ax=0$, and its row space $R = span(v_1,\ldots,v_n)$. We have $Ax = 0 \Leftrightarrow v_1x=0, \ldots, v_nx=0$. Therfore, for $r \in R$, we have the following: $$rx = span(v_1,\ldots,v_n)x = a_1v_1x + \ldots+ a_nv_nx = 0$$
+From here we have proven that $rx=0 \forall r \in R$, which means every $r$ is ortogonal with $x$, which proves what we have to prove.
+
+Assume we have a matrix $A = \begin{bmatrix}
+v_1\\
+\vdots\\
+v_n
+
+\end{bmatrix}$, its null space $N(A)$ which contains vectors $x$ satisfying $Ax=0$, and its row space $R = span(v_1,\ldots,v_n)$. We have $Ax = 0 \Leftrightarrow v_1x=0, \ldots, v_nx=0$. Therfore, for $r \in R$, we have the following: $$rx = span(v_1,\ldots,v_n)x = a_1v_1x + \ldots+ a_nv_nx = 0$$
+From here we have proven that $rx=0$, $\forall  r \in R$, which means every $r$ is ortogonal with $x$, which proves what we have to prove.
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P3.10}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{}\\
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%
+\section*{Section E}
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{E4.1}
+\textbf{Show that $\forall i: |\lambda_i|\leq 1$ \& $A$ always has an eigenvalue $\lambda_1=1$ (single one if $A$ is positive definite}\\
+
+Suppose that $A$ is a $n\times n$ matrix, then we have that:
+$$Av=\lambda v$$
+
+$$\Rightarrow   A\begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}
+=\lambda \begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}$$
+$$\Leftrightarrow \begin{bmatrix}
+a_{11} &\ldots &  a_{1n} \\
+\vdots & \ddots & \vdots \\
+a_{n1} &\ldots & a_{nn}
+\end{bmatrix}\begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}=\lambda \begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}$$
+
+$$\Leftrightarrow \begin{bmatrix}
+a_{11}+\ldots+a_{1n}\\
+\ldots\\
+a_{n1}+\ldots+a_{nn}
+\end{bmatrix}=\lambda
+\begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}
+$$
+$$\Leftrightarrow \begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}=\lambda
+\begin{bmatrix}
+1\\
+\vdots\\
+1
+\end{bmatrix}$$
+Then $\exists\lambda = 1$.
+\subsection*{E4.3}
+\textbf{Prove again the **spectral theorem** for matrix representation of linear operator $T$ in basis $\beta$: $[T]_{\beta}^{\beta} = \textsf{diag}(\lambda_1,\dots,\lambda_n) \Leftrightarrow \beta$ is an eigenbasis of $T$ with eigenvalues $\lambda_i$'s.}\\
+We first prove that $\beta$ is an eigenbasis of $T$ with eigenvalues $\lambda_i$'s $\Rightarrow \beta$: $[T]_{\beta}^{\beta} = \textsf{diag}(\lambda_1,\dots,\lambda_n)$. Supppose that $\beta = \{v_1,\ldots,v_n\}$ with eigenvalues $\lambda_1,\ldots,\lambda_n$. We have that $Tv_j = \lambda_jv_j$, so the coordinate matrix $[Tv_j]^\beta$ is$ \begin{bmatrix}
+0\\
+\vdots\\
+\lambda_j\\
+\vdots\\
+0
+\end{bmatrix}
+$ with $\lambda_j$ at the $j$th-index. Putting all the $[Tv_j]^\beta$ together, we have $[Tv_j]^\beta_\beta$ is $\begin{bmatrix}
+\lambda_1 & \ldots & 0\\
+\vdots & \ddots & \vdots\\
+0 & \ldots & \lambda_n
+\end{bmatrix} = \textsf{diag}(\lambda_1,\ldots,\lambda_n)$.\\
+We now prove that $\beta$: $[T]_{\beta}^{\beta} = \textsf{diag}(\lambda_1,\dots,\lambda_n)\Rightarrow $ $\beta$ is an eigenbasis of $T$ with eigenvalues $\lambda_i$'s.
+Similarly, for each $j$th column in $[T]^\beta_\beta = [Tv_j]^\beta_\beta$, we have the coordinate matrix $\begin{bmatrix}
+0\\
+\vdots\\
+\lambda_j\\
+\vdots\\
+0
+\end{bmatrix}$, which corresponds to the vector $\lambda_jv_j$. We thus have $[Tv_j]^\beta = [\lambda_jv_j]^\beta \Leftrightarrow Tv_j=\lambda_jv_j$, making each $v_j$ an eigenvector, and $\beta = \{v_1,\ldots,v_n\}$ an eigenbasis.
+\newpage 
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.4}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Show that if $A_{n\times n}$ has $n$ distinct eigenvalues $\Rightarrow A$ is diagonalizable.}\\
+Suppose that $A$ has $n$ distinct eigenvalues $\lambda_1,\ldots,\lambda_n$ which corresponds to the eigenvectors $v_1,\ldots,v_n$. As $lambda_1,\ldots,\lambda_n$ are all distinct, $v_1,\ldots,v_n$ are linearly independent (as proven in Terence Tao's note), and they thus form an eigenbasis of $A$. We can thus express $A$ as a diagonal matrix $\textsf{diag}(\lambda_1,\ldots,\lambda_n)$ corresponding to $\{v_1,\ldots,v_n\} \Rightarrow A$ is diagonalizable.
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{P4.7}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Prove that translation does not change volume.}\\
+Suppose that we have a translation matrix T in 3D $\begin{bmatrix}
+1 & 0 & 0 & t_x\\
+0 & 1 & 0 & t_y\\
+0 & 0 & 1 & t_z\\
+0 & 0 & 0 & 1
+\end{bmatrix}$. Then the determinant of this matrix is 
+$$\textsf{det(T)} = 1\textsf{det}(\begin{bmatrix}
+1 & 0 & t_y\\
+0 & 1 & t_z\\
+0 & 0 & 1
+\end{bmatrix}) + t_x\textsf{det}(\begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0 
+\end{bmatrix}) 
+=1.1 + 0 = 1
+$$
+Using the induction hypothesis, for a translation matrix T in n-dimension, $\begin{bmatrix}
+1 & 0 & \ldots & t_1\\
+0 & \ddots & \ddots & \vdots\\
+\vdots & \ddots & \ddots & t_n\\
+0 & 0 & 0 & 1
+\end{bmatrix}$, its determinant is
+$$\textsf{det}(T)=1(1(\ldots(1\textsf{det}\begin{bmatrix}
+1 & 0 & t_y\\
+0 & 1 & t_z\\
+0 & 0 & 1
+\end{bmatrix}+t_{n-2}\textsf{det}(\begin{bmatrix}
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0
+\end{bmatrix})
+)+t_{n-3}(0+t_{n-2}\textsf{det}(\begin{bmatrix}
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0
+\end{bmatrix})\ldots)\ldots)$$
+$$+t_1(0 + t_2(\ldots(0 + t_{n-2}\textsf{det}\begin{bmatrix}
+0 & 0 & t_{n-1}\\
+0 & 0 & t_n\\
+0 & 0 & 1
+\end{bmatrix})))$$
+$$=1\times 1\times\ldots\times (((1+0)+0)+0)\ldots) + t_1\times t_2 \times\ldots t_{n-2}\times 0=1$$
+With the determinant $=1$, by definition the volume does not change after the translation.
+
+
+\end{document}
