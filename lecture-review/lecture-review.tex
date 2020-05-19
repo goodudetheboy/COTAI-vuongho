@@ -1,0 +1,299 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{calc}
+\usepackage{amssymb}
+\setlength\parindent{0pt} %% Do not touch this
+
+
+%% -----------------------------
+%% TITLE
+%% -----------------------------
+\title{Lecture Review} %% Assignment Title
+
+\author{Ho Chi Vuong\\ %% Student name
+AI Math Foundations: Abstract Vector Spaces\\ %% Code and course name
+\textsc{Center of Talent in AI}
+}
+
+\date{\today} %% Change "\today" by another date manually
+%% -----------------------------
+%% -----------------------------
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+   
+%% %%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+
+% --------------------------
+% Start here
+% --------------------------
+
+% %%%%%%%%%%%%%%%%%%%
+\section*{Lecture 1: Abstract Algebra \& Vector Spaces}
+% %%%%%%%%%%%%%%%%%%%
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{From Algebra to AI}
+% %%%%%%%%%%%%%%%%%%%
+This section starts off this course of with some brief history of AI, where its origin, algebra, traces way back in time, since the very start of civilization. We learn some famous figures in the development of AI, including Turin machine, Rosenblatt's PERCEPTRON and more.\\
+This also touches on some intuition of some parts of machine learning, including basis functions and feature extraction (the analysis of the apple), manifold hypothesis, multimodal embeddings, encoder/decoder and the TEFPA (Task, Experience, Function space, Performance, Algorithm).
+
+
+
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{Abstract Algebra}
+% %%%%%%%%%%%%%%%%%%%
+In this part we review some key mathematics knowledge, including:
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Coordinate systems}
+% %%%%%%%%%%%%%%%%%%%
+In a nutshell, coordinate systems exist to define a point in space. There are a lot of coordinate systems, but the most commonly used are Cartesian coordinates, Cylindrical coordinates, spherical coordinates and geographic coordinates.\\
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Abstract Algebra}
+% %%%%%%%%%%%%%%%%%%%
+Algebra is the manipulation of symbols. Abstract are creating concepts that can be widely applied. Together, Abstract Algebra is the mathematics of creating concepts by the manipulation of symbols. 
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Set theory}
+% %%%%%%%%%%%%%%%%%%%
+Here we review on some properties of \textbf{Set}:
+\begin{enumerate}
+\item \textbf{Set} is a collection of objects
+\item \textbf{Subset} is when a set is a part of a bigger set, then the smaller set is called a subset of the bigger set.
+\item \textbf{Space} is a set with added structures. Here, vector spaces are sets with linear combination structures.
+\end{enumerate}
+Affine space is a vector space where after translation retains the parallel structure of the original vector space (will be more on this on subsequent lecture).
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Abstract Spaces}
+% %%%%%%%%%%%%%%%%%%%
+We are shown the diagram containing the dissection of the vector space $\mathbb{R}^n$ into different vector spaces that have different properties.
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{Vector Spaces \& Linear Algebra}
+% %%%%%%%%%%%%%%%%%%%
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Linear combinations}
+% %%%%%%%%%%%%%%%%%%%
+$$x=\alpha_1x_1+\alpha_2x_2+\ldots+\alpha_nx_n$$
+
+This is very useful in Linear Algebra, as it has some interesting properties such as decomposition (where we can understand what constitutes an object by each small objects that comprise it) and generation/synthesis (where we can create object by combining the desired properties).
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Weighted sum and average}
+% %%%%%%%%%%%%%%%%%%%
+A good example of linear combinations is Weighted sum and average, wherein newer inputs are weighted higher than older inputs. 
+$$x=\alpha_1x_1+\alpha_2x_2+\ldots+\alpha_nx_n$$
+with $x_1<x_2<\ldots<x_n$ as we input more $x$. This is useful in attention mechanism.
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Vector spaces}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Vector spaces} are spaces with linear combination structures. By definition, vector space has the following properties:
+\begin{enumerate}
+\item \textbf{Vector addition} If $v_1, v_2 \in V$, then $v_1+v_2\in V$
+\item \textbf{Scalar multiplication} If $v_1 \in V, c \in \mathbb{R}$, then $cv \in V$
+\end{enumerate}
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Basis \& Coordinate vector}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Span} of a set of vectors is a vector space that contain all possible linear combination of the vectors in the set. If $v = \{\textbf{v}_1,\ldots,\textbf{v}_n\}$, then $\textsf{span}(v) = \{w = w_1\textbf{v}_1+\ldots+w_n\textbf{v}_n\}$.\\
+We say that a set of vectors is \textbf{linearly dependent} when at least one vector in that set is in the span of the rest of the set, and \textbf{linearly independent} when no vector is in the span of the rest of the set. If $v = \{\textbf{v}_1,\ldots,\textbf{v}_n\}$, then v is a linearly dependent set $\Leftrightarrow v_k \in \textsf{span}(\textbf{v}_1,\ldots,\textbf{v}_{k-1},\textbf{v}_{k+1}+\ldots+\textbf{v}_n\}$\\
+\textbf{Basis} is the smallest set of vector that can be used to represent a vector space by the span of that basis. If $\beta$ is the basis of $V$, a vector space, then $V = span(\beta)$. Basis is linearly independent, and $\textsf{dim}(\beta)$ is the dimension of that vector space.\\
+Any vector belonging to $\textsf{span}(\beta)$ can be written as $w = w_1\beta_1 + \ldots+ w_n\beta_n$, with $\beta$ being an \textbf{ordered basis}. We define coordinate vector as the vector representing $w$ in terms of $\beta$. We have $[w]^\beta= \begin{bmatrix}
+w_1\\
+\vdots\\
+w_n
+\end{bmatrix}$.
+
+% %%%%%%%%%%%%%%%%%%%
+\section*{Lecture 2: Linear Transformations}
+% %%%%%%%%%%%%%%%%%%%
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Transformations}
+% %%%%%%%%%%%%%%%%%%%
+
+The purpose of linear transformation is to reshape the input data into a more discernible, where each of the data can be easily formed into groups for generalizing concepts. In other words, transformation is \textit{to disentangle the embedding manifolds}.
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Linear \& affine transformations}
+% %%%%%%%%%%%%%%%%%%%
+A transformation is linear when it retains its linear structure. If $T: V \rightarrow W$ is a linear transformation, then $T(au+bv) = aTu + bTv$, where $a,b \in \mathbb{R}$ and $u,v \in V$.\\
+An \textbf{affine transformation} is simply a linear transformation that preserves its affine combination structure (for example, if two vectors in $V$ are parallel, then they are still parallel after an affine transformation). Technically, it is just a linear transformation + translation. 
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Nullspace, range and rank of linear transformations}
+% %%%%%%%%%%%%%%%%%%%
+This section can be summed up with the Rank Nullity Theorem:
+$$\textsf{dim}(V) = \textsf{dim}(\textsf{range}(T)) + \textsf{dim}(\textsf{ker}(T))$$
+with $T: V \rightarrow W$, $\textsf{ker}(T) = \{v \in V : Tv = 0_V\}$, $\textsf{range}(T) = \{v\in V: Tv \neq 0_V\}$\\
+
+\begin{enumerate}
+\item If $\textsf{dim}(\textsf{ker}(T)) = 0$, then $T$ is injective (each $Tv = w$ is unique)
+\item If $\textsf{range}(V)= \textsf{range}(W)$, then $T$ is surjective (every $Tv = w$)
+\item If both, then $T$ is bijective (every $Tv = w$, with each $Tv = w$ is unique)
+\end{enumerate}
+
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Matrix representation of linear transformations}
+% %%%%%%%%%%%%%%%%%%%
+Linear transformation can be expressed using matrices. If we have $T: V \rightarrow W$, then its equivalent in matrix form would be $A_Tv = w$, with $A_T = ([T\beta_j]^\gamma)$, $\beta$ being the basis of $V$, $\gamma$ being the basis of $W$, $v \in V$ and $w \in W$.
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Rank of a matrix \& inverse matrices}
+% %%%%%%%%%%%%%%%%%%%
+In this we are acquainted with the concept of column and row space. For a matrix $A^{m\times n} = {\textbf{a}_1,\ldots \textbf{a}_n}$ with $\textbf{a}_1,\ldots \textbf{a}_n$ being column vectors, $\textsf{Col}(A) = \textsf{Row}(A^\textsf{T}) = \textsf{span}(\textbf{a}_1,\ldots \textbf{a}_n)$.\\
+We define $\textsf{rank}(A)$ being the dimension of $\textsf{range}(A)$. Then we have $\textsf{rank}(A) <= \textsf{min}(m,n)$. We say that a matrix is full rank when $\textsf{rank}(A) = \textsf{min}(m,n)$.
+
+If $T: V \rightarrow W$ is a transformation, then we say $T^{-1}: W \rightarrow T$ is its inverse transformation when $T^{-1}T = I_V$ and $TT^{-1}=I_W$. To be invertible, that transformation must be \textbf{bijective}. An example of invertible matrix is Vandermonde matrix.
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Projections}
+% %%%%%%%%%%%%%%%%%%%
+Details in lecture 3.
+
+% %%%%%%%%%%%%%%%%%%%
+\section*{Lecture 3: Inner Product Spaces}
+% %%%%%%%%%%%%%%%%%%%
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{Inner products \& alignment/similarity}
+% %%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Inner products, dot products, norm and metric}
+% %%%%%%%%%%%%%%%%%%%
+To determine the similarity between two vectors, we can  use \textbf{inner products}.\\
+An \textbf{inner product} is defined as a transformation $\langle \cdot ,\cdot\rangle: V \times V \rightarrow \mathbb{R} $. It has the following properties:
+\begin{enumerate}
+\item \textbf{Symmetry} $\langle u ,v \rangle = \langle v ,u\rangle$
+\item \textbf{Linearity} $\langle \alpha u + \beta v ,\gamma w + \omega z\rangle = \alpha\gamma \langle u ,w\rangle + \alpha \omega \langle u,z\rangle + \beta \gamma\langle v ,w\rangle + \beta \omega \langle v ,z\rangle$
+\item \textbf{Positive definiteness} $\langle v,v\rangle > 0$
+\end{enumerate}
+A special form of inner product is \textbf{dot product}: $x\cdot y = \sum_{i=1}^{n} x_iy_i= \mathbf x^\textsf{T}\mathbf y=\mathbf y^\textsf{T}\mathbf x$. We also have the \textbf{generalized dot product} $\langle \textbf{x} ,\textbf{y}\rangle = \textbf{x}^\textsf{T}M\textbf{y}$, with $M$ being a symmetric positive definite matrix (which means $\textbf{x}^\textsf{T}M\textbf{x} > 0)$ \\
+The use of inner product is in convolutional operator, when a filter is scanned through the input data and we can have the map of domain, and in the case of picture, a \textbf{feature map}.
+
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Inner product space}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Inner product space} is simply the vector space with inner product $\langle \cdot ,\cdot\rangle$.\\
+\textbf{Normed vector space} is the vector space with norm $\Vert \cdot \Vert$.\\
+\textbf{Metric space} is the vector space with metric or distance.\\
+There are many more structured vector space, like topological vector space, Hilbert and Banach spaces and so on.
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{Angle, length/size/norm, distance/metric}
+% %%%%%%%%%%%%%%%%%%%
+\textbf{Unit vectors} in direction of $\textbf{a}$ is $\textbf{u}_\textbf{a} = \frac{\textbf{a}}{\Vert \textbf{a}\Vert}$.\\
+\textbf{Vector projection} of $\textbf{a}$ onto $\textbf{b}$ is $\textbf{a}_p=\Vert \textbf{a}_p\Vert \textbf{u}_b$. We then have the \textbf{scalar projection} $\Vert \textbf{a}_p\Vert= \frac{\textbf{a}^\textsf{T}\textbf{b}}{\Vert\textbf{b}\Vert}$.\\
+If $\textbf{a}$ is \textbf{perpendicular} to $\textbf b$, or $\textbf a \perp\textbf  b$, then $\textbf a^\textsf{T}\textbf b=\textbf  b^\textsf{T}\textbf a = 0$.\\
+From the equation above, we can have $\cos(\theta) = \frac{\Vert \textbf{v},\textbf{w} \Vert}{\Vert v \Vert \Vert w\Vert}$, or the cosine similarity. We can then calculate the \textbf{angle} between \textbf{v} and \textbf{w}.
+
+\textbf{Norm} can be thought of as the \textit{size} of a vector. The general equation of a $l_p-norm$ is $\textsf{norm}_p(x) = \sqrt[p]{\sum_i|x_i|^p}$.\\
+Metric is the distance between two vectors in a vector space. A \textit{natural} metric is $d(u,v) = \Vert u-v\Vert$.\
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{Orthogonality \& projection}
+% %%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Orthonormal basis}
+% %%%%%%%%%%%%%%%%%%%
+An \textbf{orthonormal basis} is defined to be the basis of a vector space that is $mutually orthogonal$ (all vectors are orthogonal to each other) and contained of \textbf{unit vectors} (or all vectors have its norm equals 1).\\
+This makes it easy when wanting to find the orthogonal projection on that space, simply by \textbf{multiplying that vector with $\beta$, the orthonormal basis} of the concerned vector space. \\
+Moreover, orthonormal basis also makes it easy to find \textbf{ the coordinates of any vectors, inner products between any vectors, and the coordinate matrix of any linear transformation}.
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Gramm-Schmidt orthogonalization}
+% %%%%%%%%%%%%%%%%%%%
+To acquire an orthonormal basis of a vector space, we can easily do the following. If $\beta = \{\textbf{v}_1,\textbf{v}_2,\ldots,\textbf{v}_n\}$ is a non-orthonormal basis of $V$, then we can change it to $\beta' = \{\textbf{v}'_1,\textbf{v}'_2,\ldots,\textbf{v}'_n\}$ by the following process:
+\begin{enumerate}
+\item Making every vector mutually orthogonal\\
+\begin{align*}
+\textbf{u}_1&=\textbf{v}_1\\
+\textbf{u}_2&=\textbf{v}_2 - \textsf{proj}_{\textbf{u}_1}(v_2)\\
+\textbf{u}_3&=\textbf{v}_3 - \textsf{proj}_{\textbf{u}_1}(v_3) - \textsf{proj}_{\textbf{u}_2}(v_3)\\
+\vdots\\
+\textbf{u}_n&=\textbf{v}_n-\sum^{n-1}_{j=1}\textsf{proj}_{\textbf{u}_j}(\textbf{v}_k)
+\end{align*}
+\item Unit-vector-ify each vectors
+\begin{align*}
+\textbf{v}'_1&=\frac{\textbf{u}_1}{\Vert \textbf{u}_1\Vert}\\
+\textbf{v}'_2&=\frac{\textbf{u}_2}{\Vert \textbf{u}_2\Vert}\\
+\textbf{v}'_3&=\frac{\textbf{u}_3}{\Vert \textbf{u}_3\Vert}\\
+\vdots\\
+\textbf{v}'_n&=\frac{\textbf{u}_n}{\Vert \textbf{u}_n\Vert}
+\end{align*}
+\end{enumerate}
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Orthogonal complements}
+% %%%%%%%%%%%%%%%%%%%
+We say that two subspace $V$ and $W$ is \textbf{orthogonal} to each other when $\forall \textbf v\in V, \textbf w\in W$, $\textbf{v} \perp \textbf{w}	$.
+
+
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{4 fundamental subspaces of $A_{m\times n}$}
+% %%%%%%%%%%%%%%%%%%%
+$R(A) = C(A^\textsf{T}) = span(\textbf{a}_1,\ldots,\textbf{a}_n)$ when $A = \{\textbf{a}_1,\ldots,\textbf{a}_n \} $. $C(A) = R(A^\textsf{T})$ is the span of the columns of $A$. We can easily prove that $N(A) \perp R(A)$ and $N(A^\textsf{T}) \perp C(A)$, and that $\mathbb{R}^n$ is the combined space of $N(A)$ and $R(A)$.
+% %%%%%%%%%%%%%%%%%%%
+\section*{Lecture 4: Spectral Decompositions}
+% %%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{Eigenvectors \& Eigenspaces}
+% %%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Eigenvectors}
+% %%%%%%%%%%%%%%%%%%%
+We define \textbf{eigenvectors} as any vector $\textbf{v} \in V$ in a transformation $T: V \rightarrow W$ that is $Tv = \lambda v$ with $\lambda \in \mathbb{R}$. In other words, the vector after transformation is dilated by $\lambda$.
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Eigenspaces}
+% %%%%%%%%%%%%%%%%%%%
+An \textbf{eigenspace} is the set of vector $\{v \in V: Tv = \lambda v\}$, with each specific eigenvalue $\lambda$. Its nullspace is an eigenspace of T corresponding to $\lambda = 0 $.
+\subsubsection*{Diagonalizable matrix}
+A matrix $A$ is \textbf{diagonalizable} when
+\begin{enumerate}
+\item $A$ is a square matrix
+\item There exists an invertible matrix $P$ s.t. $P^{-1}AP$ is a diagonal matrix.
+\end{enumerate}
+We then have $\Lambda = \textsf{diag}(\lambda_1,\ldots,\lambda_n) = P^{-1}AP $. Symmetric matrix is always diagonalizable.\\
+We can say that two matrices $A$ and $B$ are similar when $A = P^{-1}BP$
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{Determinants}
+% %%%%%%%%%%%%%%%%%%%
+A \textbf{determinant} of a matrix represents the change of volume on a object after the matrix transformation. The determinant of a full rank matrix is never 0.
+% %%%%%%%%%%%%%%%%%%%
+\subsection*{SVD - Spectral Value Decomposition}
+% %%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%
+\subsubsection*{SVD}
+% %%%%%%%%%%%%%%%%%%%
+Different from eigendecomposition (which is $\Lambda = P^{-1}AP$ and only applicable for square matrix), \textbf{Spectral Value Decomposition} can be used for any linear transformation. Namely,
+$$A_{m\times n} = U_{m \times n} \Sigma_{m \times n} V_{m \times n}^\textsf{T} $$
+Intuitively, SVD has three steps: \textbf{rotate/flip, positive scale, rotate/flip again}.
+
+
+
+
+
+\end{document}
+
+
+%
